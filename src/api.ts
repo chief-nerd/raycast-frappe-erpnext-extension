@@ -6,6 +6,7 @@ import {
 	DocTypeItem,
 	FrappeResponse,
 	DocTypeMeta,
+	GlobalSearchResult,
 } from "./types";
 
 class ERPNextAPI {
@@ -105,6 +106,30 @@ class ERPNextAPI {
 		} catch (error) {
 			console.error(`Error searching items for DocType ${doctype}:`, error);
 			throw new Error(`Failed to search items for ${doctype}`);
+		}
+	}
+
+	async globalSearch(searchTerm: string, limit = 500): Promise<GlobalSearchResult[]> {
+		let response;
+		try {
+			const formData = new FormData();
+			formData.append('text', searchTerm);
+			formData.append('start', '0');
+			formData.append('limit', limit.toString());
+
+			response = await this.client.post('/api/method/frappe.utils.global_search.search', formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				}
+			});
+
+			if (response.data && response.data.message) {
+				return response.data.message || [];
+			}
+			return [];
+		} catch (error) {
+			console.error('Error in global search:', error, response);
+			throw new Error(`Global search failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
 		}
 	}
 

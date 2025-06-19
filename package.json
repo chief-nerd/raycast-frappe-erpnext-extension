@@ -11,9 +11,23 @@
 	"license": "MIT",
 	"commands": [
 		{
+			"name": "search",
+			"title": "Global Search",
+			"description": "Search across all documents in your ERPNext instance",
+			"mode": "view",
+			"arguments": [
+				{
+					"name": "query",
+					"placeholder": "Search query",
+					"type": "text",
+					"required": false
+				}
+			]
+		},
+		{
 			"name": "doctype",
-			"title": "Search by DocType",
-			"description": "Search and browse all DocTypes in ERPNext",
+			"title": "Browse DocTypes",
+			"description": "Browse and search all DocTypes in ERPNext",
 			"mode": "view"
 		}
 	],
