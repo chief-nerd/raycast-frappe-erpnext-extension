@@ -41,6 +41,14 @@ export interface DocField {
 	reqd?: number | boolean;
 	options?: string;
 	description?: string;
+	hidden?: number | boolean;
+	read_only?: number | boolean;
+	in_list_view?: number | boolean;
+	bold?: number | boolean;
+	idx?: number;
+	parent?: string;
+	parentfield?: string;
+	parenttype?: string;
 }
 
 export interface DocTypeMeta {
@@ -48,6 +56,8 @@ export interface DocTypeMeta {
 	fields: DocField[];
 	is_submittable?: boolean;
 	title_field?: string;
+	description?: string;
+	module?: string;
 }
 
 export interface ERPNextPreferences {
