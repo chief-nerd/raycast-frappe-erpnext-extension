@@ -9,8 +9,8 @@ import {
 	Color,
 } from "@raycast/api";
 import { erpNextAPI } from "./api";
-import { DocType } from "./types";
-import { DocTypeItemsView } from "./doctype-items";
+import { DocType, DocTypeItem } from "./types";
+import { DocumentDetail } from "./document-detail";
 
 export default function Command() {
 	const [docTypes, setDocTypes] = useState<DocType[]>([]);
@@ -97,6 +97,92 @@ export default function Command() {
 				<List.EmptyView
 					title="No DocTypes Found"
 					description="Try adjusting your search or check your ERPNext connection"
+					icon={Icon.MagnifyingGlass}
+				/>
+			)}
+		</List>
+	);
+}
+
+// Component for viewing items of a specific DocType
+function DocTypeItemsView({ docType }: { docType: DocType }) {
+	const [items, setItems] = useState<DocTypeItem[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [searchText, setSearchText] = useState("");
+
+	useEffect(() => {
+		async function fetchItems() {
+			try {
+				setLoading(true);
+				const fetchedItems = await erpNextAPI.getDocTypeItems(docType.name);
+				setItems(fetchedItems);
+			} catch (error) {
+				showToast({
+					style: Toast.Style.Failure,
+					title: `Failed to fetch ${docType.name} items`,
+					message: error instanceof Error ? error.message : "Unknown error occurred",
+				});
+			} finally {
+				setLoading(false);
+			}
+		}
+
+		fetchItems();
+	}, [docType.name]);
+
+	const filteredItems = items.filter((item) =>
+		item.name.toLowerCase().includes(searchText.toLowerCase())
+	);
+
+	return (
+		<List
+			isLoading={loading}
+			onSearchTextChange={setSearchText}
+			searchBarPlaceholder={`Search ${docType.name} items...`}
+			navigationTitle={`${docType.name} Items`}
+			throttle
+		>
+			{filteredItems.map((item) => (
+				<List.Item
+					key={item.name}
+					title={item.name}
+					subtitle={item.modified ? `Modified: ${new Date(item.modified).toLocaleDateString()}` : undefined}
+					accessories={[
+						...(item.docstatus !== undefined ? [{
+							text: item.docstatus === 0 ? "Draft" : item.docstatus === 1 ? "Submitted" : "Cancelled",
+							icon: item.docstatus === 0 ? Icon.Circle : item.docstatus === 1 ? Icon.CheckCircle : Icon.XMarkCircle,
+							tooltip: `Status: ${item.docstatus === 0 ? "Draft" : item.docstatus === 1 ? "Submitted" : "Cancelled"}`
+						}] : []),
+					]}
+					icon={{
+						source: Icon.Document,
+						tintColor: item.docstatus === 1 ? Color.Green : item.docstatus === 2 ? Color.Red : Color.Blue,
+					}}
+					actions={
+						<ActionPanel>
+							<Action.Push
+								title="View Details"
+								icon={Icon.Eye}
+								target={<DocumentDetail doctype={docType.name} name={item.name} />}
+							/>
+							<Action.OpenInBrowser
+								title="Open in Erpnext"
+								icon={Icon.Globe}
+								url={erpNextAPI.getDocumentURL(docType.name, item.name)}
+							/>
+							<Action.CopyToClipboard
+								title="Copy Document Name"
+								content={item.name}
+								shortcut={{ modifiers: ["cmd"], key: "c" }}
+							/>
+						</ActionPanel>
+					}
+				/>
+			))}
+			{!loading && filteredItems.length === 0 && (
+				<List.EmptyView
+					title={`No ${docType.name} Items Found`}
+					description="Try adjusting your search or create a new document"
 					icon={Icon.MagnifyingGlass}
 				/>
 			)}

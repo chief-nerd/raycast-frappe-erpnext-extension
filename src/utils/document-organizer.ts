@@ -77,7 +77,7 @@ export const organizeFieldsByMeta = (
 		currentGroup.fields.push({
 			fieldname: field.fieldname,
 			label: field.label || field.fieldname,
-			value: value,
+			value: formatValue(value, field.fieldname),
 		});
 	}
 
@@ -110,7 +110,7 @@ export const getMetadataFields = (document: DocTypeItem, meta: DocTypeMeta): Rec
 		if (value !== undefined && value !== null && value !== "") {
 			const field = meta.fields.find(f => f.fieldname === fieldname);
 			const label = field?.label || fieldname.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
-			metadata[label] = formatValue(value);
+			metadata[label] = formatValue(value, fieldname);
 		}
 	}
 
@@ -137,11 +137,33 @@ const isEmpty = (value: unknown): boolean => {
 };
 
 /**
+ * Formats document status values for display
+ */
+const formatDocStatus = (status: number): string => {
+	switch (status) {
+		case 0:
+			return "Draft";
+		case 1:
+			return "Submitted";
+		case 2:
+			return "Cancelled";
+		default:
+			return `Unknown (${status})`;
+	}
+};
+
+/**
  * Formats values for display
  */
-export const formatValue = (value: unknown): string => {
+export const formatValue = (value: unknown, fieldname?: string): string => {
 	if (value === null || value === undefined) return "—";
 	if (typeof value === "boolean") return value ? "Yes" : "No";
+	
+	// Handle docstatus field specifically
+	if (fieldname === "docstatus" && typeof value === "number") {
+		return formatDocStatus(value);
+	}
+	
 	if (typeof value === "object") return JSON.stringify(value, null, 2);
 
 	// Handle datetime strings
