@@ -109,13 +109,17 @@ class ERPNextAPI {
 		}
 	}
 
-	async globalSearch(searchTerm: string, limit = 500): Promise<GlobalSearchResult[]> {
+	async globalSearch(searchTerm: string, doctype?: string, limit = 500): Promise<GlobalSearchResult[]> {
 		let response;
 		try {
 			const formData = new FormData();
 			formData.append('text', searchTerm);
 			formData.append('start', '0');
 			formData.append('limit', limit.toString());
+
+			if (doctype) {
+				formData.append('doctype', doctype);
+			}
 
 			response = await this.client.post('/api/method/frappe.utils.global_search.search', formData, {
 				headers: {
@@ -135,6 +139,18 @@ class ERPNextAPI {
 
 	getNewDocumentURL(doctype: string): string {
 		return `${this.preferences.erpnext_url}/app/${doctype.toLowerCase().replace(/ /g, "-")}/new`;
+	}
+
+	async getDocumentDetail(doctype: string, name: string): Promise<DocTypeItem> {
+		try {
+			const response = await this.client.get(
+				`/api/resource/${encodeURIComponent(doctype)}/${encodeURIComponent(name)}`
+			);
+			return response.data.data;
+		} catch (error) {
+			console.error(`Error fetching document ${doctype}/${name}:`, error);
+			throw new Error(`Failed to fetch document details for ${name}`);
+		}
 	}
 
 	getDocumentURL(doctype: string, name: string): string {

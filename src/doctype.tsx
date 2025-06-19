@@ -85,7 +85,7 @@ export default function Command() {
 								url={erpNextAPI.getNewDocumentURL(docType.name)}
 							/>
 							<Action.CopyToClipboard
-								title="Copy DocType Name"
+								title="Copy Doctype Name"
 								content={docType.name}
 								shortcut={{ modifiers: ["cmd"], key: "c" }}
 							/>

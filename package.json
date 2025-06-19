@@ -21,6 +21,12 @@
 					"placeholder": "Search query",
 					"type": "text",
 					"required": false
+				},
+				{
+					"name": "doctype",
+					"placeholder": "DocType (optional)",
+					"type": "text",
+					"required": false
 				}
 			]
 		},

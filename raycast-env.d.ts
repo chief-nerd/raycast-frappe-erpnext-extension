@@ -30,7 +30,9 @@ declare namespace Arguments {
   /** Arguments passed to the `search` command */
   export type Search = {
   /** Search query */
-  "query": string
+  "query": string,
+  /** DocType (optional) */
+  "doctype": string
 }
   /** Arguments passed to the `doctype` command */
   export type Doctype = {}
