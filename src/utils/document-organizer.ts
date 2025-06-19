@@ -158,12 +158,12 @@ const formatDocStatus = (status: number): string => {
 export const formatValue = (value: unknown, fieldname?: string): string => {
 	if (value === null || value === undefined) return "—";
 	if (typeof value === "boolean") return value ? "Yes" : "No";
-	
+
 	// Handle docstatus field specifically
 	if (fieldname === "docstatus" && typeof value === "number") {
 		return formatDocStatus(value);
 	}
-	
+
 	if (typeof value === "object") return JSON.stringify(value, null, 2);
 
 	// Handle datetime strings
