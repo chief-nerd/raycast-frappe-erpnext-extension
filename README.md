@@ -1,127 +1,187 @@
-# Raycast ERPNext Extension
+# 🚀 Raycast Frappe ERPNext Extension
 
-A powerful Raycast extension that integrates with Frappe ERPNext, allowing you to:
+A powerful [Raycast](https://raycast.com) extension that brings [Frappe](https://frappe.io) and [ERPNext](https://erpnext.com) functionality directly to your macOS desktop. Search, browse, and manage your ERPNext documents with lightning speed!
 
-- **Search and browse DocTypes**: Query all available DocTypes in your ERPNext instance
-- **View DocType items**: Browse and search through documents within any DocType  
-- **Create new documents**: Quickly open the ERPNext form to create new documents
-- **Quick navigation**: Jump between DocTypes and documents seamlessly
+![Raycast ERPNext Extension](https://img.shields.io/badge/Raycast-Extension-FF6363?style=for-the-badge&logo=raycast)
+![ERPNext](https://img.shields.io/badge/ERPNext-Supported-0089FF?style=for-the-badge)
+![Frappe](https://img.shields.io/badge/Frappe-Framework-00D09C?style=for-the-badge)
 
-## Features
+## ✨ Features
 
-### 🔍 Search DocTypes
-- Browse all available DocTypes in your ERPNext instance
-- Filter by name with instant search
-- Visual indicators for custom and submittable DocTypes
+- **🔍 Universal Search**: Instantly search across all your ERPNext documents
+- **📋 DocType Browser**: Browse and explore all available document types
+- **📊 Document Details**: View beautifully organized document information with metadata
+- **🎨 Color-Coded Interface**: Intuitive color system for different business functions
+- **⚡ Lightning Fast**: Native performance with Raycast's speed
+- **🔗 Direct Integration**: Open documents directly in ERPNext with one click
+
+## 🛠️ Installation
+
+1. Install [Raycast](https://raycast.com) if you haven't already
+2. Add this extension to your Raycast extensions
+3. Configure your ERPNext connection in the extension preferences
+
+## ⚙️ Configuration
+
+Before using the extension, you'll need to configure your ERPNext connection:
+
+1. Open Raycast preferences (`⌘ + ,`)
+2. Navigate to Extensions → ERPNext
+3. Set the following:
+   - **ERPNext URL**: Your ERPNext instance URL (e.g., `https://your-company.erpnext.com`)
+   - **API Key**: Your ERPNext API key
+   - **API Secret**: Your ERPNext API secret
+
+## 📖 Commands
+
+### 🔍 Search ERPNext
+**Keyword**: `erp` or `erpnext`
+
+Instantly search across all your ERPNext documents. Simply type to find:
+- Customers and Suppliers
+- Sales and Purchase Orders
+- Items and Inventory
+- Employees and HR records
+- Projects and Tasks
+- And much more!
+
+### 📋 Browse DocTypes
+**Keyword**: `doctype`
+
+Explore all available document types in your ERPNext instance:
+- View all DocTypes organized by module
+- See custom vs standard DocTypes
+- Browse documents within each DocType
 - Quick access to create new documents
 
-### 📋 View Items
-- Browse items within any selected DocType
-- Search functionality for finding specific documents
-- Detailed view showing all document fields
-- Direct links to open documents in ERPNext
+## 🎨 Color System & Icons
 
-### ⚡ Quick Actions
-- Create new documents with one click
-- Copy document names to clipboard
-- Open documents directly in your ERPNext web interface
+Our intuitive color-coding system helps you instantly recognize different types of business documents:
 
-## Setup
+### 💚 **Green - Financial & Accounting**
+Documents related to money, payments, and financial transactions
+- 💰 **Journal Entry** - Core financial transactions
+- 💵 **Payment Entry** - Money in/out for Accounts Receivable/Payable  
+- 📒 **GL Entry** - General ledger postings
+- 🏦 **Bank Reconciliation** - Bank statement matching
+- 👤 **Employee** - HR and payroll
+- 💰 **Salary Slip** - Employee compensation
 
-### 1. Install Dependencies
-```bash
-npm install
-```
+### 🔵 **Blue - Customer-Facing & CRM**
+Documents related to customers, sales, and customer relationships
+- 📄 **Sales Order** - Orders from customers
+- 🧾 **Sales Invoice** - Bills to customers  
+- 👤 **Customer** - Customer master data
+- 💬 **Lead** - Prospective customers
+- 🎯 **Opportunity** - Sales potential
+- 📄 **Quotation** - Price quotes
 
-### 2. Configure ERPNext Connection
-The extension requires API credentials from your ERPNext instance. You'll need:
+### 🟣 **Purple - Supplier-Facing & Purchasing**
+Documents related to suppliers, purchasing, and procurement
+- 📄 **Purchase Order** - Orders to suppliers
+- 🧾 **Purchase Invoice** - Bills from suppliers
+- 🏢 **Supplier** - Supplier master data
+- 📥 **Purchase Receipt** - Goods received
+- ✓ **ToDo** - Task management
 
-- **ERPNext URL**: The base URL of your ERPNext instance (e.g., `https://your-company.erpnext.com`)
-- **API Key**: Your ERPNext API Key
-- **API Secret**: Your ERPNext API Secret
+### 🟠 **Orange - Inventory & Manufacturing**
+Documents related to stock, manufacturing, and operations
+- 📦 **Delivery Note** - Dispatch to customers
+- 🔄 **Stock Entry** - Internal stock movements
+- 🔨 **Work Order** - Manufacturing operations
+- 📋 **Bill of Materials** - Production components
+- 📦 **Item** - Product catalog
+- 🏢 **Warehouse** - Storage locations
 
-### 3. Generate API Credentials in ERPNext
+### ⚪ **Gray - Support & Internal**
+Documents for internal operations, support, and administration
+- 🐛 **Issue** - Support tickets
+- 🏷️ **Asset** - Fixed asset records
+- 🔍 **Quality Inspection** - QC checks
+- 👤 **Contact** - Contact information
+- 📁 **Project** - Project management
+- ✅ **Task** - Project tasks
 
-1. Log into your ERPNext instance
-2. Go to **User** > **API Secret** 
-3. Click **Generate Keys** or create new API credentials
-4. Copy the **API Key** and **API Secret**
+### 🔴 **Red - System & Configuration**
+System-level documents and configuration
+- ⚙️ **DocType** - Document type definitions
+- 👤 **User** - System users
+- 🛡️ **Role** - User permissions
+- 📄 **Print Format** - Document templates
+- ➕ **Custom Field** - Field customizations
 
-### 4. Install the Extension
-```bash
-npm run build
-```
+## 🚀 Usage Tips
 
-Then add the extension to Raycast by importing the built extension.
+### Quick Navigation
+- Use `⌘ + K` to open Raycast
+- Type `erp` to start searching ERPNext
+- Type `doctype` to browse document types
+- Use arrow keys to navigate results
+- Press `⏎` to view document details
+- Press `⌘ + ⏎` to open in ERPNext
 
-### 5. Configure Extension Preferences
-In Raycast:
-1. Open the extension settings
-2. Enter your ERPNext URL, API Key, and API Secret
-3. Save the configuration
+### Search Best Practices
+- **Be specific**: Search for document names, customer names, or item codes
+- **Use partial matches**: Type part of a name to find matches
+- **Browse by type**: Use DocType browser when you're exploring
+- **Keyboard shortcuts**: Learn the shortcuts for faster navigation
 
-## Usage
+### Document Details
+When viewing document details, you'll see:
+- **Organized sections**: Fields grouped as they appear in ERPNext
+- **Metadata sidebar**: Important document information
+- **Status indicators**: Visual cues for document status
+- **Quick actions**: Copy, edit, or open in browser
 
-### Search DocTypes
-1. Open Raycast
-2. Type "Search DocTypes" or use the command directly
-3. Browse or search through available DocTypes
-4. Press Enter or ⌘+Enter to view items
+## 🔧 Troubleshooting
 
-### View Documents
-1. Select a DocType from the list
-2. Browse through documents or use search to filter
-3. Press Enter to view document details
-4. Use ⌘+O to open in ERPNext web interface
-
-### Create New Documents
-- From DocType list: Select "Create New Document" action
-- From items view: Use "Create New Document" action
-- Opens ERPNext form in your default browser
-
-## Keyboard Shortcuts
-
-- **⌘+C**: Copy document/DocType name
-- **⌘+O**: Open in ERPNext (when available)
-- **⌘+←**: Navigate back
-- **Enter**: View details/items
-
-## Development
-
-### Build
-```bash
-npm run build
-```
-
-### Development Mode
-```bash
-npm run dev
-```
-
-### Lint
-```bash
-npm run lint
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**"Failed to fetch DocTypes"**
+### Connection Issues
 - Verify your ERPNext URL is correct and accessible
-- Check that your API credentials are valid
+- Check that your API Key and Secret are valid
 - Ensure your ERPNext instance allows API access
+- Test the connection in your ERPNext settings
 
-**"No items found"**
-- Some DocTypes may be empty or restricted
-- Check permissions for the DocType in ERPNext
-- Verify your user has read access to the DocType
+### Search Not Working
+- Confirm you have read permissions for the documents
+- Check if Global Search is enabled in ERPNext
+- Verify your user role has access to the modules
 
-**Connection timeout**
-- Check your internet connection
-- Verify ERPNext server is responsive
-- Consider if your ERPNext instance requires VPN access
+### Performance Tips
+- Search results are cached for better performance
+- Use specific search terms for faster results
+- Clear cache if you're seeing outdated information
 
-## License
+## 🤝 Contributing
 
-MIT License - see LICENSE file for details.
+We welcome contributions! Here's how you can help:
+
+1. **Report Bugs**: Found an issue? Please create an issue with details
+2. **Suggest Features**: Have ideas? We'd love to hear them
+3. **Improve Documentation**: Help make this README even better
+4. **Submit Pull Requests**: Code contributions are always welcome
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- **[Raycast](https://raycast.com)** - For creating an amazing productivity platform
+- **[Frappe](https://frappe.io)** - For the powerful framework that powers ERPNext
+- **[ERPNext](https://erpnext.com)** - For the comprehensive ERP solution
+- The open-source community for continuous inspiration and support
+
+## 📞 Support
+
+Need help? Here are your options:
+
+- **Documentation**: Check this README first
+- **Issues**: Create a GitHub issue for bugs or feature requests
+- **Community**: Join the Frappe/ERPNext community discussions
+- **ERPNext Support**: For ERPNext-specific questions
+
+---
+
+**Made with ❤️ for the ERPNext community**
+
+*Bringing the power of ERPNext to your fingertips through Raycast*

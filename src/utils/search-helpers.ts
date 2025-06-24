@@ -84,15 +84,59 @@ export const getIconForResult = (result: SearchResult): { source: Icon; tintColo
 	const doctype = getDocTypeFromResult(result);
 
 	const iconMap: Record<string, { source: Icon; tintColor: Color }> = {
-		"Sales Invoice": { source: Icon.Coin, tintColor: Color.Green },
-		"Purchase Invoice": { source: Icon.Coin, tintColor: Color.Green },
+		// 📊 Accounting (Money-focused: green)
+		"Journal Entry": { source: Icon.BankNote, tintColor: Color.Green },
+		"Payment Entry": { source: Icon.Coins, tintColor: Color.Green },
+		"GL Entry": { source: Icon.Book, tintColor: Color.Green },
+		"Bank Reconciliation": { source: Icon.Building, tintColor: Color.Green },
+		"Account": { source: Icon.Folder, tintColor: Color.Green },
+
+		// 🛒 Buying (Supplier relationship: purple)
+		"Purchase Order": { source: Icon.Document, tintColor: Color.Purple },
+		"Purchase Invoice": { source: Icon.Receipt, tintColor: Color.Purple },
+		"Supplier": { source: Icon.Building, tintColor: Color.Purple },
+		"Purchase Receipt": { source: Icon.Tray, tintColor: Color.Purple },
+
+		// 🛍️ Selling (Customer: blue)
+		"Sales Order": { source: Icon.Document, tintColor: Color.Blue },
+		"Sales Invoice": { source: Icon.Receipt, tintColor: Color.Blue },
+		"Customer": { source: Icon.Person, tintColor: Color.Blue },
+		"Quotation": { source: Icon.Document, tintColor: Color.Blue },
+
+		// 📦 Stock & Manufacturing (Inventory: orange)
+		"Delivery Note": { source: Icon.Box, tintColor: Color.Orange },
+		"Stock Entry": { source: Icon.ArrowClockwise, tintColor: Color.Orange },
+		"Work Order": { source: Icon.Hammer, tintColor: Color.Orange },
+		"Bill of Materials": { source: Icon.Clipboard, tintColor: Color.Orange },
 		"Item": { source: Icon.Box, tintColor: Color.Orange },
+		"Warehouse": { source: Icon.Building, tintColor: Color.Orange },
+		"Material Request": { source: Icon.Document, tintColor: Color.Orange },
+
+		// 🧩 CRM & Projects (Engagement: blue/cyan)
+		"Lead": { source: Icon.SpeechBubble, tintColor: Color.Blue },
+		"Opportunity": { source: Icon.BullsEye, tintColor: Color.Blue },
+		"Project": { source: Icon.Folder, tintColor: Color.SecondaryText },
+		"Task": { source: Icon.CheckCircle, tintColor: Color.SecondaryText },
 		"ToDo": { source: Icon.Check, tintColor: Color.Purple },
-		"Customer": { source: Icon.Person, tintColor: Color.Magenta },
-		"Supplier": { source: Icon.Person, tintColor: Color.Magenta },
+
+		// 👥 HR & Employee Management (People: green)
+		"Employee": { source: Icon.Person, tintColor: Color.Green },
+		"Leave Application": { source: Icon.Calendar, tintColor: Color.Green },
+		"Salary Slip": { source: Icon.BankNote, tintColor: Color.Green },
+		"Attendance": { source: Icon.Clock, tintColor: Color.Green },
+
+		// 🛠️ Support, Assets, Quality, Others (Neutral colors)
+		"Issue": { source: Icon.Bug, tintColor: Color.SecondaryText },
+		"Asset": { source: Icon.Tag, tintColor: Color.SecondaryText },
+		"Quality Inspection": { source: Icon.MagnifyingGlass, tintColor: Color.SecondaryText },
+		"Contact": { source: Icon.Person, tintColor: Color.SecondaryText },
+
+		// 🔧 System & Configuration (Red/system colors)
 		"DocType": { source: Icon.Cog, tintColor: Color.Red },
-		"Contact": { source: Icon.Person, tintColor: Color.Yellow },
-		"Employee": { source: Icon.Person, tintColor: Color.Yellow },
+		"User": { source: Icon.Person, tintColor: Color.Red },
+		"Role": { source: Icon.Shield, tintColor: Color.Red },
+		"Print Format": { source: Icon.Document, tintColor: Color.Red },
+		"Custom Field": { source: Icon.Plus, tintColor: Color.Red },
 	};
 
 	return iconMap[doctype] || { source: Icon.Document, tintColor: Color.Blue };

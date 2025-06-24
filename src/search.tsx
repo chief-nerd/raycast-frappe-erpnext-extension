@@ -120,12 +120,13 @@ export default function Command(props: { arguments: SearchArguments }) {
 			const documentName = getDocumentName(result);
 			const displayLabel = getDisplayLabel(result);
 			const displayTitle = `[${docType}] ${displayLabel}`;
+			const content = result.content?.replaceAll("|||", "|") || result.description || "";
 
 			return (
 				<List.Item
 					key={`${docType}-${documentName}-${index}`}
 					title={displayTitle}
-					subtitle={result.content || result.description || ""}
+					subtitle={content}
 					icon={getIconForResult(result)}
 					actions={
 						<ActionPanel>
